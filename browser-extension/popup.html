@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JobGuard AI Shield</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="ext-container">
+    <header class="ext-header">
+      <div class="logo-group">
+        <div class="shield-badge">🛡️</div>
+        <div>
+          <h1 class="logo-title">JobGuard AI</h1>
+          <p class="logo-subtitle">Real-time Scam Verification</p>
+        </div>
+      </div>
+      <span class="status-dot online" id="backendStatusDot" title="Backend connected"></span>
+    </header>
+
+    <main class="ext-main">
+      <div id="consentNotice" class="consent-card">
+        <p class="consent-text">
+          🔒 <strong>Privacy First:</strong> JobGuard AI analyzes job listings only when you explicitly trigger it. No passive data collection.
+        </p>
+      </div>
+
+      <!-- Initial / Inactive State -->
+      <div id="actionPanel" class="panel">
+        <button id="scanBtn" class="btn btn-primary">
+          <span class="btn-icon">⚡</span> Scan Current Page
+        </button>
+        <button id="manualToggleBtn" class="btn btn-secondary">
+          ✏️ Manual Text Check
+        </button>
+      </div>
+
+      <!-- Manual Input State -->
+      <div id="manualPanel" class="panel hidden">
+        <input type="text" id="manualTitle" class="input-field" placeholder="Job Title (e.g. Data Entry Assistant)" />
+        <input type="text" id="manualCompany" class="input-field" placeholder="Company Name" />
+        <textarea id="manualDesc" class="input-field textarea" placeholder="Paste job text or WhatsApp/Telegram message here..."></textarea>
+        <div class="button-row">
+          <button id="manualAnalyzeBtn" class="btn btn-primary">Analyze Job</button>
+          <button id="cancelManualBtn" class="btn btn-link">Back</button>
+        </div>
+      </div>
+
+      <!-- Loading State -->
+      <div id="loadingPanel" class="panel hidden">
+        <div class="spinner"></div>
+        <p class="loading-text" id="loadingMessage">Extracting job details & analyzing AI risk...</p>
+      </div>
+
+      <!-- Results State -->
+      <div id="resultPanel" class="panel hidden">
+        <div class="risk-card" id="riskCard">
+          <div class="risk-header">
+            <span class="risk-score" id="riskScore">--</span>
+            <div class="risk-meta">
+              <span class="risk-badge" id="riskBadge">LOW RISK</span>
+              <span class="risk-sub">Safety Assessment</span>
+            </div>
+          </div>
+          <div class="meter-bar">
+            <div class="meter-fill" id="meterFill"></div>
+          </div>
+        </div>
+
+        <div class="details-section">
+          <h3 class="section-title">Analysis Summary</h3>
+          <p class="summary-text" id="summaryText">Job listing shows normal patterns.</p>
+          
+          <div id="indicatorsList" class="indicators-list">
+            <!-- Dynamic pills inserted here -->
+          </div>
+        </div>
+
+        <div class="action-footer">
+          <a id="openFullReportBtn" href="#" target="_blank" class="btn btn-primary btn-block">
+            🔍 Open Full Forensic Report
+          </a>
+          <button id="recheckBtn" class="btn btn-link">Re-scan</button>
+        </div>
+      </div>
+
+      <!-- Error State -->
+      <div id="errorPanel" class="panel hidden">
+        <div class="error-box">
+          <span class="error-icon">⚠️</span>
+          <p id="errorText">Unable to communicate with JobGuard AI backend. Ensure backend is running at http://localhost:8000.</p>
+        </div>
+        <button id="retryBtn" class="btn btn-secondary">Try Again</button>
+      </div>
+    </main>
+
+    <footer class="ext-footer">
+      <a href="http://localhost:5173" target="_blank" class="footer-link">JobGuard AI Web Portal</a>
+      <span class="sep">•</span>
+      <span class="footer-version">v1.0.0</span>
+    </footer>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
